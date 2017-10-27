@@ -1,4 +1,5 @@
 # Kashflow CLI
+Kashflow CLI is a small command line utility for exporting data from Kashflow accounting software. It exports as JSON so you can easily import it into your scripts or just keep a backup outside of Kashflow. 
 
 ```
 npm install kashflow-cli -g
