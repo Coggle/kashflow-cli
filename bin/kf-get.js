@@ -69,4 +69,9 @@ program
     .description('export banks to JSON')
     .action(require('../lib/banks').get(onProgress, toJSONFile(program.opts().output||'./banks.json')));
 
+program
+    .command('nominalcodes')
+    .description('export nominal codes to JSON')
+    .action(require('../lib/nominalcodes').get(onProgress, toJSONFile(program.opts().output||'./nominalcodes.json')));
+
 program.parse(process.argv);
