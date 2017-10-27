@@ -1,5 +1,9 @@
 # Kashflow CLI
 
+```
+npm install kashflow-cli -g
+```
+
 ### Example Usage
 
 ```
