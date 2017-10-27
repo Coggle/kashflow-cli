@@ -1,0 +1,27 @@
+{
+  "name": "kashflow-cli",
+  "version": "0.0.1",
+  "description": "Command line interface for exporting Kashflow data",
+  "main": "kf.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "accounts",
+    "kashflow",
+    "export",
+    "backup"
+  ],
+  "author": "Andy Pritchard",
+  "license": "MIT",
+  "dependencies": {
+    "async": "^2.5.0",
+    "bluebird": "^3.5.1",
+    "commander": "^2.11.0",
+    "kashflow-soap-api": "0.0.1",
+    "underscore": "^1.8.3"
+  },
+  "bin": {
+    "kf": "bin/kf.js"
+  }
+}
