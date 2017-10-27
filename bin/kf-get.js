@@ -31,47 +31,98 @@ program
     .usage('get <resource>')
     .option('-o, --output <file>', 'output to a JSON file')
 
-
 program
     .command('journals <max-journal>')
     .description('export journals to JSON')
     .option('-s, --start <start>', 'journal number to start at [default 0]', 0)
-    .action(require('../lib/journals').get(onProgress, toJSONFile(program.opts().output||'./journals.json')));
+    .action((maxJournal, command) => {
+        require('../lib/journals').get(maxJournal, {
+            input: () => program.pipedData,
+            onProgress: onProgress
+        }, toJSONFile(program.opts().output||'./journals.json'))
+    });
 
 program
     .command('customers')
     .description('export customers to JSON')
-    .action(require('../lib/customers').get(onProgress, toJSONFile(program.opts().output||'./customers.json')));
+    .action((command) => {
+        require('../lib/customers').get({
+            input: () => program.pipedData,
+            onProgress: onProgress
+        }, toJSONFile(program.opts().output||'./customers.json'))
+    });
 
 program
     .command('receipts')
     .description('export receipts to JSON')
     .option('--filter <filter>', 'filter by receipt type [default All]', 'All')
-    .action(require('../lib/receipts').get(onProgress, toJSONFile(program.opts().output||'./receipts.json')));
+    .action((command) => {
+        require('../lib/receipts').get({
+            input: () => program.pipedData,
+            onProgress: onProgress
+        }, toJSONFile(program.opts().output||'./receipts.json'))
+    });
 
 program
     .command('invoices')
     .description('export invoices to JSON')
-    .action(require('../lib/invoices').get(onProgress, toJSONFile(program.opts().output||'./invoices.json')));
+    .action((command) => {
+        require('../lib/invoices').get({
+            input: () => program.pipedData,
+            onProgress: onProgress
+        }, toJSONFile(program.opts().output||'./invoices.json'))
+    });
 
 program
     .command('suppliers')
     .description('export suppliers to JSON')
-    .action(require('../lib/suppliers').get(onProgress, toJSONFile(program.opts().output||'./suppliers.json')));
+    .action((command) => {
+        require('../lib/suppliers').get({
+            input: () => program.pipedData,
+            onProgress: onProgress
+        }, toJSONFile(program.opts().output||'./suppliers.json'))
+    });
 
 program
     .command('transactions')
     .description('export transactions to JSON')
-    .action(require('../lib/transactions').get(onProgress, toJSONFile(program.opts().output||'./transactions.json')));
+    .action((command) => {
+        require('../lib/transactions').get({
+            input: () => program.pipedData,
+            onProgress: onProgress
+        }, toJSONFile(program.opts().output||'./transactions.json'))
+    });
 
 program
     .command('banks')
     .description('export banks to JSON')
-    .action(require('../lib/banks').get(onProgress, toJSONFile(program.opts().output||'./banks.json')));
+    .action((command) => {
+        require('../lib/banks').get({
+            input: () => program.pipedData,
+            onProgress: onProgress
+        }, toJSONFile(program.opts().output||'./banks.json'))
+    });
 
 program
     .command('nominalcodes')
     .description('export nominal codes to JSON')
-    .action(require('../lib/nominalcodes').get(onProgress, toJSONFile(program.opts().output||'./nominalcodes.json')));
+    .action((command) => {
+        require('../lib/nominalcodes').get({
+            input: () => program.pipedData,
+            onProgress: onProgress
+        }, toJSONFile(program.opts().output||'./nominalcodes.json'))
+    });
 
-program.parse(process.argv);
+
+if (process.stdin.isTTY) {
+    program.parse(process.argv);
+} else {
+    var data = '';
+    process.stdin.on('data', function(chunk) {
+        data += chunk;
+    });
+    process.stdin.on('end', function() {
+       program.pipedData = JSON.parse(data);
+       program.parse(process.argv);
+    });
+}
