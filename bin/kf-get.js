@@ -47,7 +47,7 @@ program
     .command('customers')
     .description('export customers to JSON')
     .action((command) => {
-        require('../lib/customers').get(maxJournal, _.extend({}, command.opts(), {
+        require('../lib/customers').get(_.extend({}, command.opts(), {
             input: () => program.pipedData,
             onProgress: onProgress
         }), toJSONFile(program.opts().output||'./customers.json'))
@@ -58,7 +58,7 @@ program
     .description('export receipts to JSON')
     .option('--filter <filter>', 'filter by receipt type [default All]', 'All')
     .action((command) => {
-        require('../lib/receipts').get(maxJournal, _.extend({}, command.opts(), {
+        require('../lib/receipts').get(_.extend({}, command.opts(), {
             input: () => program.pipedData,
             onProgress: onProgress
         }), toJSONFile(program.opts().output||'./receipts.json'))
@@ -68,7 +68,7 @@ program
     .command('invoices')
     .description('export invoices to JSON')
     .action((command) => {
-        require('../lib/invoices').get(maxJournal, _.extend({}, command.opts(), {
+        require('../lib/invoices').get(_.extend({}, command.opts(), {
             input: () => program.pipedData,
             onProgress: onProgress
         }), toJSONFile(program.opts().output||'./invoices.json'))
@@ -78,7 +78,7 @@ program
     .command('suppliers')
     .description('export suppliers to JSON')
     .action((command) => {
-        require('../lib/suppliers').get(maxJournal, _.extend({}, command.opts(), {
+        require('../lib/suppliers').get(_.extend({}, command.opts(), {
             input: () => program.pipedData,
             onProgress: onProgress
         }), toJSONFile(program.opts().output||'./suppliers.json'))
@@ -88,7 +88,7 @@ program
     .command('transactions')
     .description('export transactions to JSON')
     .action((command) => {
-        require('../lib/transactions').get(maxJournal, _.extend({}, command.opts(), {
+        require('../lib/transactions').get(_.extend({}, command.opts(), {
             input: () => program.pipedData,
             onProgress: onProgress
         }), toJSONFile(program.opts().output||'./transactions.json'))
@@ -98,7 +98,7 @@ program
     .command('banks')
     .description('export banks to JSON')
     .action((command) => {
-        require('../lib/banks').get(maxJournal, _.extend({}, command.opts(), {
+        require('../lib/banks').get(_.extend({}, command.opts(), {
             input: () => program.pipedData,
             onProgress: onProgress
         }), toJSONFile(program.opts().output||'./banks.json'))
@@ -108,7 +108,7 @@ program
     .command('nominalcodes')
     .description('export nominal codes to JSON')
     .action((command) => {
-        require('../lib/nominalcodes').get(maxJournal, _.extend({}, command.opts(), {
+        require('../lib/nominalcodes').get(_.extend({}, command.opts(), {
             input: () => program.pipedData,
             onProgress: onProgress
         }), toJSONFile(program.opts().output||'./nominalcodes.json'))
